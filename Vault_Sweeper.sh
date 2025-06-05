@@ -43,14 +43,14 @@ do
 
         key=$(echo "$line" | cut -d "=" -f1 | xargs)
 
-        if [[ "$key" =~ "$Blacklisted_keys" ]];                    # check for blacklisted keys 
+        if [[ "$key" =~ $Blacklisted_keys ]];                    # check for blacklisted keys 
         then
             Invalid_count=$((Invalid_count + 1))
             Rejected_lines+=("$line")
             continue
         fi
 
-        if [[ "$line" =~ "$Valid_regex" ]];                         # Comparing the variable name and the valid regex keys
+        if [[ "$line" =~ $Valid_regex ]];                         # Comparing the variable name and the valid regex keys
         then
             echo "$line" >> "$Temp_file"
             Valid_count=$((Valid_count + 1))
@@ -60,11 +60,12 @@ do
         fi
     done < "$file"
 
-    mv "$Temp_file" "$file"                                          # Move the contents from the temporary files into the actual file 
-
+    Sanitized_file="${file}.sanitized"                                         
+    mv "$Temp_file" "$Sanitized_file"                                # Move the contents from the temporary files into the Sanitized file  
+    
     Permissions=$(stat -c %a "$file")
     User_Info=$(stat -c "UID=%u (%U) GID=%g (%G)" "$file")
-    Last_modified=$(stat -c %y "$file")
+    Last_modified=$(stat -c  "%U %y" "$file")
     ACLS=$(getfacl -p -t "$file" 2>/dev/null | grep -v "^#")
     E_ATTR=$(getfattr -d "$file" 2>/dev/null | grep -v "^#")
 
@@ -89,7 +90,8 @@ do
         fi  
     } >> "$Log_file"
 
-    echo "Cleaned file: $file"
+    echo "Cleaned file: $file "
+    echo "Sanitized file is stored in $Sanitized_file"
 
 done
 
