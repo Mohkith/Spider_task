@@ -1,1 +1,52 @@
+#1 Types of traffic 
+Refer image 1
+
+#2 How many DNS queries were made in total
+714 
+
+#3 What types of DNS queries were made?
+
+Refer Image 2 
+
+3 Types of DNS queries  -
+PTR -2	
+HTTPS-144
+AAAA-282
+A-286
+Total -714
+
+#4 What is a loopback interface?
+
+A loopback interface is a virtual network interface used by a computer to communicate with itself. It doesn't connect to any physical network hardware but instead routes data back to the same machine.
+
+#5 How many .txt files were requested 
+
+Refer image 3
+
+3 text files were requested
+ 
+#6  Encoded content in one text file 
+
+Refer image 4
+Decoded content - FLAG{spid3r_network_master}
+
+#7 Was any attempt made to distract the analyst using decoy files? Explain. 
+
+Refer image 5
+Yes there were two decoy files found in the HTTP requests
+
+
+#8 Are there any known ports being used for uncommon services?
+No
+
+#9 How many HTTP GET requests are visible in the capture? 
+
+Refer image 6
+
+# What User-Agent was used to make the HTTP requests? 
+
+Refer image 7
+
+curl/8.5.0\r\n
+
 
