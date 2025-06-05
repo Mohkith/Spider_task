@@ -105,5 +105,55 @@ Password: password
 
 a) Brute forcing 
 
+Security: Low
+Use the below payloads in the username and password parameter and brute force it using burp intruder
+payloads used: https://portswigger.net/web-security/authentication/auth-lab-usernames
+               https://portswigger.net/web-security/authentication/auth-lab-passwords
+Security: Medium 
+
+Security: Hard
+
+b) Command Injection
+
+# Security: Low
+
+Here these are not blacklisted: “ ; ”, : “ && “ properly 
+We can use whoami and the users command also 
+
+Command: 192.168.0.103; ls
+
+# Security: Medium
+
+Here the “ ; ” and the “ && ” are replaced by “  “ (space) 
+Alternatively, we can use “ & “ ( Single and ) 
+
+Command: 192.168.0.103 & whoami
+
+# Security: High
+
+As given, there is a typo in the script 
+Given: “| “ There is a space in this. If we do not provide the space, this command will work. 
+
+Command: 192.168.0.103|ls
+
+c) Sqli
+
+Security: low
+There is no sanitization of the input
+
+Command: admin' OR '1'='1
+also, we can use the Order by command to get the no of columns in the table
+
+It gives us the username list
+
+Security: Medium
+
+
+
+
+
+
+
+
 
 
