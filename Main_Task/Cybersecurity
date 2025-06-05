@@ -20,34 +20,48 @@ We can use zenmap or nmap
 
 Nmap Command : nmap -T4 -F 44.228.249.3
 
-6) 
+6) Directory structure
+Command: dirb testphp.vulnweb.com
+==> DIRECTORY: http://testphp.vulnweb.com/admin/                                                                                                                                                                  
++ http://testphp.vulnweb.com/cgi-bin (CODE:403|SIZE:276)                                                                                                                                                          
++ http://testphp.vulnweb.com/cgi-bin/ (CODE:403|SIZE:276)                                                                                                                                                         
++ http://testphp.vulnweb.com/crossdomain.xml (CODE:200|SIZE:224)                                                                                                                                                  
+==> DIRECTORY: http://testphp.vulnweb.com/CVS/                                                                                                                                                                    
++ http://testphp.vulnweb.com/CVS/Entries (CODE:200|SIZE:1)                                                                                                                                                        
++ http://testphp.vulnweb.com/CVS/Repository (CODE:200|SIZE:8)                                                                                                                                                     
++ http://testphp.vulnweb.com/CVS/Root (CODE:200|SIZE:1)   
+
+7) Page Title 
+Command: curl -s http://testphp.vulnweb.com | grep -i "<title>"
+
+<title>Home of Acunetix Art</title>
+
+8) parameters
+http://testphp.vulnweb.com/listproducts.php?cat=1
+
+http://testphp.vulnweb.com/showimage.php?file=chair.jpg
+
+http://testphp.vulnweb.com/guestbook.php
+
+http://testphp.vulnweb.com/cart.php?add=1
+
+9) Forms 
+Command : curl -s http://testphp.vulnweb.com | grep -i "<form>"
+
+<form action="search.php?test=query" method="post">
+
+# Difference between passive and active recon
+
+Active recon -Active reconnaissance involves directly interacting with the target, such as network scanning or port scanning, while passive reconnaissance 
+gathers information from publicly available sources without directly probing the target
+
+Passive recon - Involves gathering information without directly interacting with the target system.
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Task 3: Recon and Exploitation On the Spider Server
+# Task 3: Recon and Exploitation On the Spider Server
 
 Find IP:
 Command: dig spider.nitt.edu
