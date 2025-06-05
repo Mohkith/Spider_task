@@ -1,1 +1,71 @@
+Task 1:  http://testphp.vulnweb.com
+
+1) IP Address: 44.228.249.3
+Command : ping testphp.vulnweb.com
+
+2) DNS Info 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Target Domain: spider-nitt.org
+
+Recon:
+
+#Finding subdomains
+
+1) Subfinder
+subfinder -d spider-nitt.org -all | tee -a subs1.txt
+
+2) Assetfinder
+assetfinder spider-nitt.org -subs-only | tee -a subs2.txt 
+
+3)Sorting unique subdomains from the two folders
+sort -u subs1.txt subs2.txt > mainsubs.txt 
+
+4) Finding live subdomains using httpx 
+ cat mainsubs.txt | httpx -sc > livesubs.txt
+
+5) Fetching subdomains with status codes 200 and 302
+cat livesubs.txt | grep -e "200" -e "302" 
+
+6) In the list of subdomains this subdomain(Spidertest.spider-nitt.org) was interesting 
+
+On checking it contained a vulnerable web application DVWA
+
+7) Login
+
+On checking the GitHub profile linked to it: There was a line "run setup.php"
+In setup.php page, it contained the credentials 
+Username: admin
+Password: password
+
+8) Different Vulnerabilities
+
+a) Brute forcing 
+
+
 
