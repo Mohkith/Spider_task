@@ -4,6 +4,23 @@ Task 1:  http://testphp.vulnweb.com
 Command : ping testphp.vulnweb.com
 
 2) DNS Info 
+Refer to the images
+A, AAAA, MX, NS, TXT
+
+3)Tech stack
+
+4) Subdomains
+Command :  subfinder -d testphp.vulnweb.com -all
+
+Subdomains Found: sieb-web1.testphp.vulnweb.com
+                  www.testphp.vulnweb.com 
+
+5) Open ports/Services 
+We can use zenmap or nmap
+
+Nmap Command : nmap -T4 -F 44.228.249.3
+
+6) 
 
 
 
@@ -29,6 +46,13 @@ Command : ping testphp.vulnweb.com
 
 
 
+
+Task 3: Recon and Exploitation On the Spider Server
+
+Find IP:
+Command: dig spider.nitt.edu
+IP address: 14.139.162.136
+Os: No Matching Os for the host     (Output from Nmap) 
 
 
 Target Domain: spider-nitt.org
