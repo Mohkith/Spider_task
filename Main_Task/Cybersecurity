@@ -8,6 +8,7 @@ Refer to the images
 A, AAAA, MX, NS, TXT
 
 3)Tech stack
+Refer to the image Tech_stack
 
 4) Subdomains
 Command :  subfinder -d testphp.vulnweb.com -all
@@ -147,6 +148,16 @@ also, we can use the Order by command to get the no of columns in the table
 It gives us the username list
 
 Security: Medium
+
+As there is no input to execute commands, we can use the url parameters bu capturing it in burp suite and alterinf the id parameter 
+
+id=%31%20%4f%52%20%31%3d%31%23%20& Submit=Submit
+Command: 1 OR 1=1 ; Here it is url encoded 
+
+We can see the response in the repeater tab.
+
+Security : Hard
+
 
 
 
