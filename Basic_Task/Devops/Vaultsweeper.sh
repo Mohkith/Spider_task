@@ -59,7 +59,7 @@ do
             Rejected_lines+=("$line")
         fi
     done < "$file"
-
+    
     Sanitized_file="${file}.sanitized"                                         
     mv "$Temp_file" "$Sanitized_file"                                # Move the contents from the temporary files into the Sanitized file  
     
@@ -68,6 +68,13 @@ do
     Last_modified=$(stat -c  "%U %y" "$file")
     ACLS=$(getfacl -p -t "$file" 2>/dev/null | grep -v "^#")
     E_ATTR=$(getfattr -d "$file" 2>/dev/null | grep -v "^#")
+
+    [[ "$Permissions"= *7?? || "$Permissions" = *6?? ]] && echo "Warning: The file $file has insecure permissions ($Permissions)." >> "$Log_file"
+
+    [[ -u "$file" ]] && echo "Warning:The file $file has suid set" >> "$Log_file"
+    [[ -g "$file" ]] && echo "Warning:The file $file has gid set"  >> "$Log_file"
+    [[ -k "$file" ]] && echo "Warning:The file $file has sticky bit set" >> "$Log_file"
+    [[ -n "$E_ATTR" ]]&& echo "Warning: The file $file has extended attributes set" >> "$Log_file"
 
     {
         echo "File:$file"
@@ -89,6 +96,13 @@ do
             done
         fi  
     } >> "$Log_file"
+
+    echo "Want to lock down the file and set permission to 600?(y/n):m "
+    read -r choice
+    if [[ "$choice" == "y" || "$choice" == "Y" ]]; 
+    then
+        sudo chmod 600 "$Sanitized_file"  # Lockdown the file by setting permissions to 600 
+    fi
 
     echo "Cleaned file: $file "
     echo "Sanitized file is stored in $Sanitized_file"
